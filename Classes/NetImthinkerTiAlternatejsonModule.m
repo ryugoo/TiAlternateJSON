@@ -11,6 +11,9 @@
 
 @implementation NetImthinkerTiAlternatejsonModule
 
+@synthesize string;
+@synthesize json;
+
 #pragma mark Internal
 
 // this is generated for your module, please do not change it
@@ -91,34 +94,45 @@
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:args[0] options:kNilOptions error:&error];
 
-    NSString *stringified = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return stringified;
+    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return string;
 }
 
 - (id)parse:(id)args
 {
     NSError *error;
     ENSURE_SINGLE_ARG(args, NSString);
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[(NSString *)args dataUsingEncoding:NSUTF8StringEncoding]
+    json = [NSJSONSerialization JSONObjectWithData:[(NSString *)args dataUsingEncoding:NSUTF8StringEncoding]
                                                          options:kNilOptions
                                                            error:&error];
-
     return json;
 }
 
 - (id)stringify2:(id)args
 {
-    NSError *error;
-    NSString *stringified = [[[NSString alloc] init] autorelease];
-    [stringified JSONStringWithOptions:JKSerializeOptionNone includeQuotes:YES error:&error];
-    return stringified;
+    string = [args[0] JSONString];
+    return string;
 }
 
 - (id)parse2:(id)args
 {
     NSError *error;
     ENSURE_SINGLE_ARG(args, NSString);
-    NSDictionary *json = [(NSString *)args objectFromJSONStringWithParseOptions:JKParseOptionNone error:&error];
+    json = [(NSString *)args objectFromJSONStringWithParseOptions:JKParseOptionNone error:&error];
+    return json;
+}
+
+- (id)stringify3:(id)args
+{
+    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+    string = [writer stringWithObject:args[0]];
+    return string;
+}
+
+- (id)parse3:(id)args
+{
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
+    json = [parser objectWithString:args[0]];
     return json;
 }
 

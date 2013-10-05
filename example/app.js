@@ -18,24 +18,30 @@
     });
     win.add(start_detection);
 
-    var label1, label2, label3, label4, label5, label6;
+    var label1, label2, label3, label4, label5, label6, label7, label8;
     label1 = Ti.UI.createLabel({
-        top: 10
+        top: 5
     });
     label2 = Ti.UI.createLabel({
-        top: 10
+        top: 5
     });
     label3 = Ti.UI.createLabel({
-        top: 10
+        top: 5
     });
     label4 = Ti.UI.createLabel({
-        top: 10
+        top: 5
     });
     label5 = Ti.UI.createLabel({
-        top: 10
+        top: 5
     });
     label6 = Ti.UI.createLabel({
-        top: 10
+        top: 5
+    });
+    label7 = Ti.UI.createLabel({
+        top: 5
+    });
+    label8 = Ti.UI.createLabel({
+        top: 5
     });
     win.add(label1);
     win.add(label2);
@@ -43,6 +49,8 @@
     win.add(label4);
     win.add(label5);
     win.add(label6);
+    win.add(label7);
+    win.add(label8);
 
     // Example object (http://json.org/example.html)
     var example = {
@@ -124,6 +132,24 @@
         end = Date.now();
         label6.applyProperties({
             text: 'JSONKit parse ' + (end - start) + ' [ms]'
+        });
+
+        start = Date.now();
+        for (i = 0; i < LOOP_LIMIT; i++) {
+            str = AltJSON.stringify3(example);
+        }
+        end = Date.now();
+        label7.applyProperties({
+            text: 'SBJson stringify ' + (end - start) + ' [ms]'
+        });
+
+        start = Date.now();
+        for (i = 0; i < LOOP_LIMIT; i++) {
+            AltJSON.parse3(str);
+        }
+        end = Date.now();
+        label8.applyProperties({
+            text: 'SBJson parse ' + (end - start) + ' [ms]'
         });
     }
 

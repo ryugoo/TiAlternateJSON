@@ -6,9 +6,13 @@
  */
 #import "TiModule.h"
 #import "JSONKit.h"
+#import "SBJson.h"
 
 @interface NetImthinkerTiAlternatejsonModule : TiModule 
 {
 }
+
+@property (nonatomic, retain) NSString *string;
+@property (nonatomic, retain) NSDictionary *json;
 
 @end
