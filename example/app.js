@@ -128,6 +128,5 @@
     }
 
     win.addEventListener('open', detection);
-
     win.open();
 }());
