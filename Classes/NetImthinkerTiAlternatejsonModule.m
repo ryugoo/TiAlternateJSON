@@ -11,9 +11,6 @@
 
 @implementation NetImthinkerTiAlternatejsonModule
 
-@synthesize string;
-@synthesize json;
-
 #pragma mark Internal
 
 // this is generated for your module, please do not change it
@@ -35,7 +32,7 @@
 	// this method is called when the module is first loaded
 	// you *must* call the superclass
 	[super startup];
-	
+
 	NSLog(@"[INFO] %@ loaded",self);
 }
 
@@ -44,12 +41,12 @@
 	// this method is called when the module is being unloaded
 	// typically this is during shutdown. make sure you don't do too
 	// much processing here or the app will be quit forceably
-	
+
 	// you *must* call the superclass
 	[super shutdown:sender];
 }
 
-#pragma mark Cleanup 
+#pragma mark Cleanup
 
 -(void)dealloc
 {
@@ -72,7 +69,7 @@
 {
 	if (count == 1 && [type isEqualToString:@"my_event"])
 	{
-		// the first (of potentially many) listener is being added 
+		// the first (of potentially many) listener is being added
 		// for event named 'my_event'
 	}
 }
@@ -92,47 +89,75 @@
 - (id)stringify:(id)args
 {
     NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:args[0] options:kNilOptions error:&error];
-
-    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSData *data = nil;
+    __block NSString *string = nil;
+    __unsafe_unretained NSString *weakArgs = args;
+    data = [NSJSONSerialization dataWithJSONObject:args[0] options:kNilOptions error:&error];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    });
+    error = nil;
     return string;
 }
 
 - (id)parse:(id)args
 {
-    NSError *error;
+    __block NSError *error;
+    __block NSDictionary *json = nil;
     ENSURE_SINGLE_ARG(args, NSString);
-    json = [NSJSONSerialization JSONObjectWithData:[(NSString *)args dataUsingEncoding:NSUTF8StringEncoding]
-                                                         options:kNilOptions
-                                                           error:&error];
+    __unsafe_unretained NSString *weakArgs = args;
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        json = [NSJSONSerialization JSONObjectWithData:[weakArgs dataUsingEncoding:NSUTF8StringEncoding]
+                                               options:kNilOptions
+                                                 error:&error];
+    });
+    error = nil;
     return json;
 }
 
 - (id)stringify2:(id)args
 {
-    string = [args[0] JSONString];
+    __unsafe_unretained id weakArgs = args;
+    __block NSString *string = nil;
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        string = [args[0] JSONString];
+    });
     return string;
 }
 
 - (id)parse2:(id)args
 {
-    NSError *error;
+    __block NSError *error;
+    __block NSDictionary *json = nil;
     ENSURE_SINGLE_ARG(args, NSString);
-    json = [(NSString *)args objectFromJSONStringWithParseOptions:JKParseOptionNone error:&error];
+    __unsafe_unretained NSString *weakArgs = args;
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        json = [weakArgs objectFromJSONStringWithParseOptions:JKParseOptionNone error:&error];
+    });
+    error = nil;
     return json;
 }
 
 - (id)stringify3:(id)args
 {
+    __block NSString *string = nil;
+    __unsafe_unretained id weakArgs = args;
     SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    string = [writer stringWithObject:args[0]];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        string = [writer stringWithObject:args[0]];
+    });
     return string;
 }
 
 - (id)parse3:(id)args
 {
+    ENSURE_SINGLE_ARG(args, NSString);
+    __unsafe_unretained NSString *weakArgs = args;
+    __block NSDictionary *json = nil;
     SBJsonParser *parser = [[SBJsonParser alloc] init];
-    json = [parser objectWithString:args[0]];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        json = [parser objectWithString:args];
+    });
     return json;
 }
 

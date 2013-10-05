@@ -12,7 +12,4 @@
 {
 }
 
-@property (nonatomic, retain) NSString *string;
-@property (nonatomic, retain) NSDictionary *json;
-
 @end
