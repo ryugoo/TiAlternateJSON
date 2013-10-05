@@ -28,6 +28,8 @@
 		24DE9E1211C5FE74003F90F6 /* NetImthinkerTiAlternatejsonModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* NetImthinkerTiAlternatejsonModuleAssets.m */; };
 		AA747D9F0F9514B9006C5449 /* NetImthinkerTiAlternatejson_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* NetImthinkerTiAlternatejson_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		BD5AB76F1800273700116F0D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BD5AB76C1800273700116F0D /* JSONKit.h */; };
+		BD5AB7701800273700116F0D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5AB76D1800273700116F0D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,10 @@
 		24DE9E1011C5FE74003F90F6 /* NetImthinkerTiAlternatejsonModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetImthinkerTiAlternatejsonModuleAssets.m; path = Classes/NetImthinkerTiAlternatejsonModuleAssets.m; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* NetImthinkerTiAlternatejson_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetImthinkerTiAlternatejson_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BD5AB76B1800273700116F0D /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		BD5AB76C1800273700116F0D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		BD5AB76D1800273700116F0D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		BD5AB76E1800273700116F0D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libNetImthinkerTiAlternatejson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNetImthinkerTiAlternatejson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,10 +110,22 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BD5AB76A1800273700116F0D /* JSONKit */,
 				AA747D9E0F9514B9006C5449 /* NetImthinkerTiAlternatejson_Prefix.pch */,
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		BD5AB76A1800273700116F0D /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				BD5AB76B1800273700116F0D /* CHANGELOG.md */,
+				BD5AB76C1800273700116F0D /* JSONKit.h */,
+				BD5AB76D1800273700116F0D /* JSONKit.m */,
+				BD5AB76E1800273700116F0D /* README.md */,
+			);
+			path = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA747D9F0F9514B9006C5449 /* NetImthinkerTiAlternatejson_Prefix.pch in Headers */,
+				BD5AB76F1800273700116F0D /* JSONKit.h in Headers */,
 				24DD6CF91134B3F500162E58 /* NetImthinkerTiAlternatejsonModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* NetImthinkerTiAlternatejsonModuleAssets.h in Headers */,
 			);
@@ -195,6 +214,7 @@
 			files = (
 				24DD6CFA1134B3F500162E58 /* NetImthinkerTiAlternatejsonModule.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* NetImthinkerTiAlternatejsonModuleAssets.m in Sources */,
+				BD5AB7701800273700116F0D /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

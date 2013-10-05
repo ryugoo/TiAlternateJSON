@@ -91,8 +91,7 @@
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:args[0] options:kNilOptions error:&error];
 
-    NSString *stringified;
-    stringified = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *stringified = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return stringified;
 }
 
@@ -104,6 +103,22 @@
                                                          options:kNilOptions
                                                            error:&error];
 
+    return json;
+}
+
+- (id)stringify2:(id)args
+{
+    NSError *error;
+    NSString *stringified = [[[NSString alloc] init] autorelease];
+    [stringified JSONStringWithOptions:JKSerializeOptionNone includeQuotes:YES error:&error];
+    return stringified;
+}
+
+- (id)parse2:(id)args
+{
+    NSError *error;
+    ENSURE_SINGLE_ARG(args, NSString);
+    NSDictionary *json = [(NSString *)args objectFromJSONStringWithParseOptions:JKParseOptionNone error:&error];
     return json;
 }
 
